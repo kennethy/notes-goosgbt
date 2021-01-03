@@ -77,3 +77,48 @@ Write a failing acceptance test → → →  Write a failing unit test → → �
 - Tests would be difficult to write when code is poorly structured. It's a sign to consider refactoring the code. (Listen to the tests)
 - Coupling: module A is said to be deeply coupled to module B if changes in module B force a lot of changes in module A
 - Cohesion: module A is said to be cohesive when its responsibilities form a meaningful/coherent unit.
+
+# Chapter 2 - Test-Driven Development with Objects
+
+### A Web of Objects
+
+```
+The big idea is 'messaging' [...] The key in making great and growable systems is much more to design how its modules communicate rather than what their internal properties and behaviours should be. (Alan Kay)
+```
+
+### Values and Objects
+
+Values
+- model unchanging quantities or measurements
+- immutable and have no individual identity
+- - two value instances are effectively the same if they have the same state
+
+Objects
+- have an identity, might change state over time, and model computational processes
+- mutable state to model their behaviour over time
+- two objects of the same type have separate entities even if they have exactly the same state
+
+### Follow the Messages
+
+- A communication pattern is a set of rules that govern how a group of objects talk to each other: the roles they play, what messages they can send and when, and so on.
+- Domain model lies within the communication patterns, because they are what gives meaning to the universe of possible relationships between the objects.
+- Think of objects in terms of roles, responsibilities, and collaborators; An object is an implementation of one or more roles; a role is a set of related responsibilities; and a responsibility is an obligation to perform a task or know information; A collaboration is an interaction of objects and roles.
+
+### Tell, Don't Ask
+
+- Calling object should describe what it wants in terms of the role that its neighbor plays, and let the called object decide how to make that happen. This is also known as "Tell, Don't Ask" or formally, the *Law of Demeter*. 
+- Avoid train-wreck code: `object.getA().getB().getC();`
+
+### But Sometimes Ask
+
+- We *ask* when getting information from values and collections.
+
+### Unit-Testing the Collaborating Objects
+
+- Substitute target object's neighbours with mock objects
+- Expectations specify how the target object communicates with its neighbours
+- Interface Discovery: tease out the supporting roles our object needs and fill in real implementations as we develop the rest of the system
+
+### Support for TDD with Mock Objects
+
+Mockery: the object that holds the context of a test, creates mock objects, and manages expectations and stubbing for the test.
