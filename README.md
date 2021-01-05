@@ -148,3 +148,7 @@ Understand the Problem → → Broad-Brush Design (Architecture) → → Automat
           ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ←
 ```
 
+### Expose Uncertainty Early
+
+Building out the "walking skeleton" flushes out issues early in the project when there's still time, budget, and goodwill to address them.
+
