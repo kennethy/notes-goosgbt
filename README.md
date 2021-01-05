@@ -122,3 +122,29 @@ Objects
 ### Support for TDD with Mock Objects
 
 Mockery: the object that holds the context of a test, creates mock objects, and manages expectations and stubbing for the test.
+
+# Chapter 4 - Kick-Starting the Test-Driven Cycle
+
+### First, Test a Walking Skeleton
+
+- A "walking skeleton" is an implementation of the thinnest possible slice of real functionality that we can automatically build, deploy, and test end-to-end.
+
+### Deciding the Shape of the Walking Skeleton
+
+The point of the "walking skeleton" is to use the writing of the first test to draw out the context of the project, to help the team map out the landscape of their solution - the essential decisions that they must take before they can write any code.
+
+### Build Sources of Feedback
+
+```
+Understand the Problem → → Broad-Brush Design (Architecture) → → Automate (Build, Deployment, End-to-end, Tests) → → End-to-end Cycle
+          ↓                               ↓                                   ↓                                             ↓
+          ↓                               ↓                                   ↓                                             ↓
+          ↓                               ↓                                   ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ←
+          ↓                               ↓                                                                                 ↓
+          ↓                               ↓                                                                                 ↓
+          ↓                               ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ←
+          ↓                                                                                                                 ↓
+          ↓                                                                                                                 ↓
+          ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ←
+```
+
