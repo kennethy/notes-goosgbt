@@ -152,3 +152,63 @@ Understand the Problem → → Broad-Brush Design (Architecture) → → Automat
 
 Building out the "walking skeleton" flushes out issues early in the project when there's still time, budget, and goodwill to address them.
 
+# Chapter 5 - Maintaining the Test-Driven Cycle
+
+### Start Each Feature with an Acceptance Test
+
+- Write the acceptance test using only terminology from the application's domain, not from the underlying technologies. This helps to understand what the system should do, without tying us to any of our initial assumptions about the implementation or complicating the test with technological details
+- Acceptance tests both test the integration of unit-tested objects and push the project forwards
+
+### Separate Tests That Measure Progress from Those That Catch Regressions
+
+- Organize test suites to reflect the different roles that the tests fullfill.
+- Unit and integration tests should run quickly and should run fast
+- Acceptance tests for completed features. catch regressions, and should always pass, although they might take longer to run.
+- If requirements change, move any affected acceptance tests out of the regression suite back into the in-progress suite.
+
+### Start Testing with the Simplest Success Case
+
+- Start by testing the simplest success cases first. Degenerate cases usually don't provide enough feedback about the validity of the early phases of a project.
+- While working through the simple success cases, keep a note of the failure cases, refactorings and other technical tasks that need to be addressed.
+- A feature is considered completed and robust once the failure cases are also checked off.
+
+### Write The Test That You'd Want to Read
+
+- Aim to write tests that are easy to understand and express the expectations on how the system should behave
+
+### Watch The Test Fail
+
+- Always watch the test fail before writing the code to make it pass, and check the diagnostic message.
+- Ensure the tests fail as expected and the diagnostics clearly indicate why they failed
+
+```
+Write a failing test → → Make the diagnostics clear → → Make the test pass → → refactor → → repeat
+```
+
+### Develop from the Inputs to the Outputs
+
+- We work our way through the system: from the objects that receive external events, through the intermediate layers, to the central domain model, and then on to other boundary objects that generate an externally visible response.
+
+### Unit-Test Behaviour, Not Methods
+
+- Focus on the features that the object unde test should provide, eac of which may require collaboration with its neighbours and calling more than one of its method.
+- Need to know how to use the class to achieve a goal, not how to exercise all the paths through its code.
+
+### Listen to the Tests
+
+- When we find a feature that's difficult to test, we don't just ask ourselves how to test it, but also why is it difficult to test. It's a sign that the design needs improving when it's hard to test.
+- Keep up the quality of the system by refactoring when we see a weakness in the design.
+
+```
+         ↑ → → → → → → → → → → → → → → → → → → → → → → →
+         ↑                                             ↓
+Write a failing unit test → → Make the test pass → → Refactor
+         ↑                                             ↓
+         ↑                                             ↓
+         ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ←
+```
+
+### Tuning the Cycle
+
+- Depending on the project context, balance between exhaustively testing execution paths and testing integrations depending.
+
