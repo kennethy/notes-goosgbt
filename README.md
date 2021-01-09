@@ -212,3 +212,81 @@ Write a failing unit test → → Make the test pass → → Refactor
 
 - Depending on the project context, balance between exhaustively testing execution paths and testing integrations depending.
 
+# Chapter 6 - Object-Oriented Style
+
+> Always design a thing by considering it in its next larger context - a chair in a room, a room in a house, a house in an environment, an environment in a city plan. -- Eliel Saarinen
+
+### Designing for Maintainability
+
+**Separate of Concerns**: If all the relevant changes are in one area of code, we don't have to hunt around the system to get the job done.
+
+**Higher level of abstraction**: Can get more done if we program by combining components of useful functionality rather than manipulating variables and control flow.
+
+**Ports and Adapters architecture**: the code for the business domain is isolated from its dependencies on technical infrastructure, such as databases and user interfaces.
+
+**Encapsulation**: ensures the behaviour of an object can only be affected through its API.
+
+**Information Hiding**: implementation details concealed behind the abstraction of its API.
+
+**Standard practices to main encapsulation:**
+- define immutable value types
+- avoid global variables and singleton
+- copy collections and mutable values when passing them between objects
+
+### Internal vs. Peers
+
+If we expose too much of an object's internals through its API, its clients/peers will end up doing some of its work. This leads to coupled objects and changes made in one will rippple across to others.
+
+### No And's, Or's, or But's
+
+Object should conform to the single responsibility principle. The responsibility of an object should be described without using any conjunctions ("and", "or").
+
+The principle applies to new abstraction from combined objects as well (when composite simpler than the sum of its parts).
+
+### Object Peer Stereotypes
+
+Three types of relationships among objects loosely categorized:
+
+**Dependencies:** when an object cannot function without some other services. Like a graphics package that depends on a screen or canvas to draw on.
+
+**Notifications** when an object notifies ("fire and forget") interested peers whenever it changes state or perform a significant action. The object neither knows nor cares which peers are listening. Like a button control notifying registered listeners, but it does not know what those listeners will do, neither do the listeners know how the event is dispatched to them.
+
+**Adjustments:** when an object's behaviour is adjusted by its peers to the wider needs of the system. Like a policy object that controls access to another object.
+
+Tip: "New or new not. There is no try". We try to make sure to always create a valid object.
+
+### Composite Simpler Than Sum of its Parts
+
+When composing objects into a new type, we want the new type to exhibit simpler behaviour than all of its components parts considered together. Components parts are hidden and the composed object exposes a simpler abstraction/interface.
+
+```
+// from
+moneyEditor.getAmountField().setText(String.valueOf(money.amount()));
+moneyEditor.getCurrencyField().setText(money.currencyCode());
+
+// initial attempt as per 'Tell, Don't Ask', but object's structure is still exposed (amountField and currencyField)
+moneyEditor.setAmountField(money.amount());
+moneyEditor.setCurrencyField(money.currencyCode());
+
+// finally
+moneyEditor.setValue(money);
+```
+
+The rule helps us decide whether an object hides enough information, and it contributes to raising the level of abstraction.
+
+### Context Independence
+
+The context independence rule helps us decide whether an object hides too much or hides the wrong information.
+
+An object is said to be *context-independent* if it has not built-in knowledge about the system in which it executes.
+
+Context independence guides us towards coherent objects that can be applied in different contexts, and towards the systems that we can change by reconfiguring how their objects composed.
+# Tips
+
+**Composite Simpler Than the Sum of Its Parts**
+
+The API of a composite object should not be more complicated than that of any of its components.
+
+**One Domain Vocabulary**
+
+A class that uses terms from multiple domains might be violiating *context independence* (p55), unless it's part of a bridging layer.
