@@ -281,6 +281,43 @@ The context independence rule helps us decide whether an object hides too much o
 An object is said to be *context-independent* if it has not built-in knowledge about the system in which it executes.
 
 Context independence guides us towards coherent objects that can be applied in different contexts, and towards the systems that we can change by reconfiguring how their objects composed.
+
+# Chapter 7 - Achieving Object-Oriented Design
+
+**Three Aspects of TDD**
+1. Starting with a test means we have to describe *what* we want to achieve before we consider *how*.
+2. Limit the scope of the test to ensure the object under test has a clear separation of concerns.
+3. Dependencies need to be known when writing unit tests for an object. This reinforces *context indepdendence* as object with implicit dependencies would be painful to setup and would make a point of clearing it up.
+
+
+### Communication over Classification
+
+>An interface describes whether two components will fit together, while a protocol descries whether they will work together.
+
+TDD with mock objects as a techniue to make communications between objects visible.
+
+### Value Types
+
+*Values* are immutable and have no meaningful identity; *Objects* have state, so they have identity and relationships with each other. It's encouraged to define types to represent value concepts in the domain.
+
+Three Techniques for introducing value types:
+  
+1. **Breaking out:** break out object when it has too many responsibilities, and it's too hard to test.
+2. **Budding off:** introduce a placeholder type when there's a new domain concept in the code. It starts off as a class that wraps around a single field, and details will be filled in as the code grows.
+3. **Bundling up:** group values that are oftenly used together into a single construct.
+
+### Identify Relationships with Interfaces
+
+Interfaces should be kept as arrow as possible. The fewer methods there are on an interface, the more obvious is its role in the callign object.
+
+### Refactor Interfaces Too
+
+Merge interfaces with similar responsibilities. Split interface if it turns out to represent different concepts.
+
+### Building Up to Higher-Level Programming
+
+Organize the code into two layers: an *implementation layer*, which is the graph of objects, its behaviour is the combined result of how its objects respond to events; and, a *declarative layer* which builds up the object in the implementation layer, using small "sugar" methods and syntax to describe *what* the code will do, while the implementation layer describes how the code does it - Declarative layer is, in effect, a small *domain-specific* language.
+
 # Tips
 
 **Composite Simpler Than the Sum of Its Parts**
@@ -290,3 +327,11 @@ The API of a composite object should not be more complicated than that of any of
 **One Domain Vocabulary**
 
 A class that uses terms from multiple domains might be violiating *context independence* (p55), unless it's part of a bridging layer.
+
+**The Tests Say...**
+
+Break up an object if it comes t oo large to test easily, or if its test failures become difficult to interpret. Then unit-test the new parts separately.
+
+When writing a test, we ask ourselves, "if this worked, who would know?" If the right answer to that question is not in the target object, it's probably time to introduce a new collaborator.
+
+When the test for an object becomes too complicated to setup - when there are too many moving parts to get the code into the relevant state - consider bundling up some of the collaborating objects.
