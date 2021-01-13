@@ -318,6 +318,23 @@ Merge interfaces with similar responsibilities. Split interface if it turns out 
 
 Organize the code into two layers: an *implementation layer*, which is the graph of objects, its behaviour is the combined result of how its objects respond to events; and, a *declarative layer* which builds up the object in the implementation layer, using small "sugar" methods and syntax to describe *what* the code will do, while the implementation layer describes how the code does it - Declarative layer is, in effect, a small *domain-specific* language.
 
+# Chapter 8 - Building on Third-Party Code
+
+### Only Mock Types That You Own
+
+**Don't Mock Types You Can't Change**
+
+Test that mock external libraries often need to be complex to get the code into the right state for the functionality we need to exercise. Another risk is that we have to make sure the behaviour we stub or mock matches what the external library will actually do.
+
+**Write An Adapter Layer**
+
+Write a layer of *adapter objects* that uses the third-party API to implement the interfaces. The layer introduces a set of interfaces that define the relationship between our application and the rest of the word in our application's terms, and it prevents low-evel technical concepts leaking into the application domain model.
+
+### Mock Application Objects in Integration Tests
+
+Do mock objects when testing objects that integrates with third-party code - but only to mock the callback interfaces defined in the application, to ensure adapter translates events between domains correctly.
+
+
 # Tips
 
 **Composite Simpler Than the Sum of Its Parts**
